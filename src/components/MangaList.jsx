@@ -2,7 +2,7 @@
 import Container from "./Container";
 import MangaCard from "./MangaCard";
 
-export default function MangaList() {
+export default function MangaList({ mangas }) {
   return (
     <Container>
       <div className="py-12">
@@ -12,7 +12,9 @@ export default function MangaList() {
 
         {/* Manga Cards*/}
         <div className="grid grid-cols-[repeat(auto-fill,minmax(225px,1fr))] gap-6 px-2">
-          <MangaCard />
+          {mangas.map((manga) => (
+            <MangaCard key={manga.mal_id} manga={manga} />
+          ))}
         </div>
       </div>
     </Container>
