@@ -1,6 +1,6 @@
 function App() {
   return (
-    <h1 className="text-center pt-16 font-bold text-2xl text-indigo-500">
+    <h1 className="pt-16 text-center text-2xl font-bold text-indigo-500">
       Initial setup
     </h1>
   );
