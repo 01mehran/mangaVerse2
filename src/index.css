@@ -98,3 +98,13 @@ body {
   font-family: var(--font-poppins);
   min-height: 100dvh;
 }
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-primary-lighter);
+}
+
+html.dark {
+  scrollbar-color: var(--color-primary-dark) var(--color-bg-dark);
+}
