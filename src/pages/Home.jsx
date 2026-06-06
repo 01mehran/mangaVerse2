@@ -1,6 +1,9 @@
 // React Hooks;
 import { useEffect, useState } from "react";
 
+// React-router-dom;
+import { useSearchParams } from "react-router-dom";
+
 // Libraries;
 import axios from "axios";
 
@@ -8,8 +11,7 @@ import axios from "axios";
 import MangaList from "../components/MangaList";
 import Loading from "../components/Loading";
 import ErrorMsg from "../components/ErrorMsg";
-import { useSearchParams } from "react-router-dom";
-import Pagination from "../assets/Pagination";
+import Pagination from "../components/Pagination";
 
 export default function Home() {
   const [mangas, setMangas] = useState([]);

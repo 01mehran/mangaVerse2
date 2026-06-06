@@ -86,7 +86,7 @@ export default function MangaDetails() {
                   {/* SCORE + STATS */}
                   <div className="flex flex-wrap items-center gap-3">
                     <div className="bg-warning-light text-warning-dark dark:bg-warning-dark-bg dark:text-warning-dark rounded-xl px-4 py-2 font-semibold">
-                      ⭐ {mangaDetails.score?.toFixed(2) ?? "N/A"}
+                      ⭐ {mangaDetails?.score?.toFixed(2) ?? "N/A"}
                     </div>
 
                     <div className="bg-secondary-light text-secondary dark:bg-secondary-bg-dark dark:text-secondary-dark rounded-xl px-4 py-2 font-semibold">

@@ -13,15 +13,18 @@ import MangaCard from "../components/MangaCard";
 import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
 import ErrorMsg from "../components/ErrorMsg";
+import Pagination from "../components/Pagination";
 
 export default function SearchResults() {
   const [searchedManga, setSearchedManga] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [pagination, setPagination] = useState(null);
 
   const [searchParams] = useSearchParams();
 
   const query = searchParams.get("q");
+  const page = Number(searchParams.get("page")) || 1;
 
   const getSearchedManga = async () => {
     setIsLoading(true);
@@ -29,9 +32,10 @@ export default function SearchResults() {
 
     try {
       const { data: response } = await axios(
-        `https://api.jikan.moe/v4/manga?q=${query}`,
+        `https://api.jikan.moe/v4/manga?q=${query}&page=${page}&limit=24`,
       );
       setSearchedManga(response.data);
+      setPagination(response.pagination);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -44,7 +48,7 @@ export default function SearchResults() {
     if (query) {
       getSearchedManga();
     }
-  }, [query]);
+  }, [query, page]);
 
   return (
     <section className="bg-bg dark:bg-bg-dark min-h-screen py-12">
@@ -92,6 +96,8 @@ export default function SearchResults() {
             </>
           )}
         </main>
+
+        {pagination && <Pagination pagination={pagination} />}
       </Container>
     </section>
   );
