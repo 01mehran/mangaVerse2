@@ -90,28 +90,34 @@ export default function MangaDetails() {
                     </div>
 
                     <div className="bg-secondary-light text-secondary dark:bg-secondary-bg-dark dark:text-secondary-dark rounded-xl px-4 py-2 font-semibold">
-                      Rank #{mangaDetails?.rank}
+                      Rank #{mangaDetails?.rank ?? "N/A"}
                     </div>
 
                     <div className="bg-info-bg text-info-text dark:bg-info-bg-hover rounded-xl px-4 py-2 text-sm font-semibold">
-                      Popularity #{mangaDetails?.popularity}
+                      Popularity #{mangaDetails?.popularity ?? "N/A"}
                     </div>
 
                     <div className="bg-success-bg text-text-muted dark:bg-success-bg dark:text-text-secondary-dark rounded-xl px-4 py-2 text-sm font-semibold">
-                      Favorites {mangaDetails?.favorites}
+                      Favorites {mangaDetails?.favorites ?? "N/A"}
                     </div>
                   </div>
 
                   {/* BADGES */}
                   <div className="flex flex-wrap gap-2">
-                    {mangaDetails?.genres?.map((g) => (
-                      <span
-                        key={g.mal_id}
-                        className="rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-purple-500/20 dark:text-indigo-200"
-                      >
-                        {g.name}
+                    {mangaDetails?.genres?.length ? (
+                      mangaDetails.genres?.map((genre) => (
+                        <span
+                          key={genre.mal_id}
+                          className="bg-primary-bg text-primary dark:bg-primary-dark-bg dark:text-primary-dark-light rounded-full px-1.5 py-1 text-xs font-medium"
+                        >
+                          {genre.name}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-primary dark:text-primary-dark">
+                        N/A
                       </span>
-                    ))}
+                    )}
                   </div>
 
                   <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
