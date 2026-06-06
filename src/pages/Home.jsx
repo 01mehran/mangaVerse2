@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <section>
       <main className="bg-bg dark:bg-bg-dark min-h-screen">
-        {error && <ErrorMsg error={error} />}
+        {error && <ErrorMsg error={error} onRetry={getTopManga} />}
         {isLoading && <Loading />}
 
         {!isLoading && !error && <MangaList mangas={mangas} />}

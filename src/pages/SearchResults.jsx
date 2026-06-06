@@ -23,7 +23,7 @@ export default function SearchResults() {
 
   const query = searchParams.get("q");
 
-  const searchManga = async () => {
+  const getSearchedManga = async () => {
     setIsLoading(true);
     setError(null);
 
@@ -42,7 +42,7 @@ export default function SearchResults() {
 
   useEffect(() => {
     if (query) {
-      searchManga();
+      getSearchedManga();
     }
   }, [query]);
 
@@ -53,7 +53,7 @@ export default function SearchResults() {
         <BackButton />
 
         <main className="min-h-screen">
-          {error && <ErrorMsg error={error} />}
+          {error && <ErrorMsg error={error} onRetry={getSearchedManga} />}
           {isLoading && <Loading />}
 
           {/* Empty state */}

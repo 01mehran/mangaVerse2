@@ -52,7 +52,7 @@ export default function MangaDetails() {
       <Container>
         <BackButton />
 
-        {error && <ErrorMsg error={error} />}
+        {error && <ErrorMsg error={error} onRetry={getSelectedMangaDetails} />}
         {isLoading && <Loading />}
 
         {!isLoading && !error && (
