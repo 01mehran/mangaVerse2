@@ -14,6 +14,7 @@ import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
 import ErrorMsg from "../components/ErrorMsg";
 import Pagination from "../components/Pagination";
+import BackToTopButton from "../components/BackToTopButton";
 
 export default function SearchResults() {
   const [searchedManga, setSearchedManga] = useState([]);
@@ -57,6 +58,8 @@ export default function SearchResults() {
 
   return (
     <section className="bg-bg dark:bg-bg-dark min-h-screen py-12">
+      <BackToTopButton />
+
       <Container>
         {/* Back button */}
         <BackButton />
@@ -66,7 +69,7 @@ export default function SearchResults() {
           {isLoading && <Loading />}
 
           {/* Empty state */}
-          {!isLoading && searchedManga.length === 0 && (
+          {!isLoading && !error && searchedManga.length === 0 && (
             <div className="flex flex-col items-center justify-center text-center">
               <span className="mb-3 text-5xl">⚠️</span>
               <h2 className="dark: text-xl font-medium text-black/90 italic dark:text-white">
@@ -79,7 +82,7 @@ export default function SearchResults() {
           )}
 
           {/* Results */}
-          {!isLoading && searchedManga.length > 0 && (
+          {!isLoading && !error && searchedManga.length > 0 && (
             <>
               {/* Search title */}
               <h1 className="text-text dark:text-text-dark mb-8 text-xl font-bold md:text-2xl">

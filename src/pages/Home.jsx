@@ -12,6 +12,7 @@ import MangaList from "../components/MangaList";
 import Loading from "../components/Loading";
 import ErrorMsg from "../components/ErrorMsg";
 import Pagination from "../components/Pagination";
+import BackToTopButton from "../components/BackToTopButton";
 
 export default function Home() {
   const [mangas, setMangas] = useState([]);
@@ -59,6 +60,8 @@ export default function Home() {
       </main>
 
       {pagination && <Pagination pagination={pagination} />}
+
+      <BackToTopButton />
     </section>
   );
 }
