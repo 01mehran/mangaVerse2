@@ -8,11 +8,17 @@ import axios from "axios";
 import MangaList from "../components/MangaList";
 import Loading from "../components/Loading";
 import ErrorMsg from "../components/ErrorMsg";
+import { useSearchParams } from "react-router-dom";
+import Pagination from "../assets/Pagination";
 
 export default function Home() {
   const [mangas, setMangas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [pagination, setPagination] = useState(null);
+
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page")) || 1;
 
   const getTopManga = async () => {
     setIsLoading(true);
@@ -20,9 +26,10 @@ export default function Home() {
 
     try {
       const { data: response } = await axios(
-        `https://api.jikan.moe/v4/top/manga`,
+        `https://api.jikan.moe/v4/top/manga?page=${page}`,
       );
       setMangas(response.data);
+      setPagination(response.pagination);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -33,7 +40,7 @@ export default function Home() {
 
   useEffect(() => {
     getTopManga();
-  }, []);
+  }, [page]);
 
   return (
     <section>
@@ -43,6 +50,8 @@ export default function Home() {
 
         {!isLoading && !error && <MangaList mangas={mangas} />}
       </main>
+
+      {pagination && <Pagination pagination={pagination} />}
     </section>
   );
 }
