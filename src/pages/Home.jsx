@@ -22,7 +22,6 @@ export default function Home() {
       const { data: response } = await axios(
         `https://api.jikan.moe/v4/top/manga`,
       );
-      console.log(response);
       setMangas(response.data);
     } catch (err) {
       console.error(err);

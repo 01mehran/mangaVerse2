@@ -1,3 +1,9 @@
+// React-router-dom;
+import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
+
+// React Hooks;
+import { useEffect, useState } from "react";
+
 // Components;
 import Container from "./Container";
 import Input from "./Input";
@@ -9,6 +15,27 @@ import { Moon, Sun } from "lucide-react";
 import logo from "../assets/logo.png";
 
 export default function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    const trimedQuery = searchQuery.trim();
+
+    if (trimedQuery) {
+      navigate({
+        pathname: "/search",
+        search: createSearchParams({
+          q: searchQuery,
+        }).toString(),
+      });
+
+      setSearchQuery("");
+    }
+  };
+
   return (
     <header className="dark:bg-surface-light-dark/95 border-border bg-surface/80 text-text dark:border-border-dark dark:text-text-dark sticky top-0 z-50 w-full border-b py-4 backdrop-blur-lg">
       <Container>
@@ -19,7 +46,12 @@ export default function Header() {
             <span className="text-primary dark:text-primary-dark">Verse</span>
           </article>
 
-          <Input className="hidden w-110 md:flex lg:w-150" />
+          <Input
+            className="hidden w-110 md:flex lg:w-150"
+            onHandleSearch={handleSearch}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
 
           {/* Right Side */}
           <article className="flex items-center gap-px">
@@ -43,7 +75,12 @@ export default function Header() {
 
       {/* Mobile Search */}
       <Container>
-        <Input className="flex pt-3 md:hidden" />
+        <Input
+          className="flex pt-3 md:hidden"
+          onHandleSearch={handleSearch}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
       </Container>
     </header>
   );

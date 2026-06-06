@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 // Pages;
 import Home from "./pages/Home";
 import MangaDetails from "./pages/MangaDetails";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/manga/:id" element={<MangaDetails />} />
+        <Route path="/search" element={<SearchResults />} />
       </Routes>
 
       <Footer />

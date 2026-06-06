@@ -1,6 +1,5 @@
 // Static Cover;
 import { Link } from "react-router-dom";
-import mangaCover from "../assets/download.jfif";
 
 export default function MangaCard({ manga }) {
   return (
@@ -9,7 +8,7 @@ export default function MangaCard({ manga }) {
         {/* Cover */}
         <div className="relative aspect-3/4 overflow-hidden">
           <img
-            src={manga?.images?.jpg?.image_url ?? mangaCover}
+            src={manga?.images?.jpg?.image_url}
             alt={`Cover of ${manga.title}`}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
