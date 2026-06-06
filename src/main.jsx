@@ -10,10 +10,15 @@ import App from "./App.jsx";
 // React-router-dom;
 import { BrowserRouter } from "react-router-dom";
 
+// Theme Context Provider;
+import { ThemeContextProvider } from "./ThemeContext.jsx";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ThemeContextProvider>
+        <App />
+      </ThemeContextProvider>
     </BrowserRouter>
   </StrictMode>,
 );

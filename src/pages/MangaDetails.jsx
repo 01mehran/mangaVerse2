@@ -44,7 +44,10 @@ export default function MangaDetails() {
   useEffect(() => {
     getSelectedMangaDetails();
 
-    scrollTo(0, 0);
+    scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [id]);
 
   return (

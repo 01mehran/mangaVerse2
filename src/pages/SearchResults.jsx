@@ -48,6 +48,11 @@ export default function SearchResults() {
     if (query) {
       getSearchedManga();
     }
+
+    scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [query, page]);
 
   return (

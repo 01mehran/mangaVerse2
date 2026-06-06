@@ -42,6 +42,11 @@ export default function Home() {
 
   useEffect(() => {
     getTopManga();
+
+    scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [page]);
 
   return (

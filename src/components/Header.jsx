@@ -2,11 +2,14 @@
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 
 // React Hooks;
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Components;
 import Container from "./Container";
 import Input from "./Input";
+
+// Theme Context;
+import { useTheme } from "../ThemeContext";
 
 // Icons;
 import { Moon, Sun } from "lucide-react";
@@ -16,6 +19,7 @@ import logo from "../assets/logo.png";
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
+  const { handleToggleTheme } = useTheme();
 
   const navigate = useNavigate();
 
@@ -65,7 +69,10 @@ export default function Header() {
             </div>
 
             {/* Dark/Light Toggle Button */}
-            <button className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 hover:scale-105 hover:bg-indigo-100 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10">
+            <button
+              onClick={handleToggleTheme}
+              className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 hover:scale-105 hover:bg-indigo-100 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+            >
               <Moon size={18} className="block dark:hidden" />
               <Sun size={18} className="hidden dark:block" />
             </button>
