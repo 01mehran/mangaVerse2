@@ -18,6 +18,7 @@ import MainLayout from "./layouts/MainLayout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Loading from "./components/Loading";
+import ErrorMsg from "./components/ErrorMsg";
 
 // Pages;
 import Home from "./pages/Home";
@@ -34,16 +35,19 @@ const router = createBrowserRouter([
         path: "/",
         loader: topMangaList,
         element: <Home />,
+        errorElement: <ErrorMsg />,
       },
       {
         path: "/manga/:id",
         loader: mangaDetailsLoader,
         element: <MangaDetails />,
+        errorElement: <ErrorMsg />,
       },
       {
         path: "/search",
         loader: searchedMangasResults,
         element: <SearchResults />,
+        errorElement: <ErrorMsg />,
       },
     ],
   },
