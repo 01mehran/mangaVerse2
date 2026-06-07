@@ -1,60 +1,26 @@
-// React Hooks;
-import { useEffect, useState } from "react";
-
-// React-router-dom;
-import { useSearchParams } from "react-router-dom";
-
-// Libraries;
-import axios from "axios";
+// React-router-data;
+import {
+  useLoaderData,
+  useNavigation,
+  useSearchParams,
+} from "react-router-dom";
 
 // Components;
 import Container from "../components/Container";
 import MangaCard from "../components/MangaCard";
 import Loading from "../components/Loading";
 import BackButton from "../components/BackButton";
-import ErrorMsg from "../components/ErrorMsg";
 import Pagination from "../components/Pagination";
 import BackToTopButton from "../components/BackToTopButton";
 
 export default function SearchResults() {
-  const [searchedManga, setSearchedManga] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [pagination, setPagination] = useState(null);
+  const { searchedManga, pagination } = useLoaderData();
 
   const [searchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
 
-  const query = searchParams.get("q");
-  const page = Number(searchParams.get("page")) || 1;
-
-  const getSearchedManga = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const { data: response } = await axios(
-        `https://api.jikan.moe/v4/manga?q=${query}&page=${page}&limit=24`,
-      );
-      setSearchedManga(response.data);
-      setPagination(response.pagination);
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (query) {
-      getSearchedManga();
-    }
-
-    scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [query, page]);
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
 
   return (
     <section className="bg-bg dark:bg-bg-dark min-h-screen py-12">
@@ -65,11 +31,10 @@ export default function SearchResults() {
         <BackButton />
 
         <main className="min-h-screen">
-          {error && <ErrorMsg error={error} onRetry={getSearchedManga} />}
           {isLoading && <Loading />}
 
           {/* Empty state */}
-          {!isLoading && !error && searchedManga.length === 0 && (
+          {!isLoading && searchedManga.length === 0 && (
             <div className="flex flex-col items-center justify-center text-center">
               <span className="mb-3 text-5xl">⚠️</span>
               <h2 className="dark: text-xl font-medium text-black/90 italic dark:text-white">
@@ -82,7 +47,7 @@ export default function SearchResults() {
           )}
 
           {/* Results */}
-          {!isLoading && !error && searchedManga.length > 0 && (
+          {!isLoading && searchedManga.length > 0 && (
             <>
               {/* Search title */}
               <h1 className="text-text dark:text-text-dark mb-8 text-xl font-bold md:text-2xl">

@@ -1,29 +1,60 @@
 // React-router-dom;
-import { Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from "react-router-dom";
+
+// APIs;
+import { topMangaList } from "./services/topMangas.loader";
+import { mangaDetails as mangaDetailsLoader } from "./services/mangaDetails.loader";
+import { searchedMangasResults } from "./services/searchedResults.loader";
+
+// MainLayout;
+import MainLayout from "./layouts/MainLayout";
 
 // components;
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
+import ErrorMsg from "./components/ErrorMsg";
 
 // Pages;
 import Home from "./pages/Home";
 import MangaDetails from "./pages/MangaDetails";
 import SearchResults from "./pages/SearchResults";
 
+const router = createBrowserRouter([
+  {
+    element: <MainLayout />,
+    HydrateFallback: Loading,
+
+    children: [
+      {
+        path: "/",
+        loader: topMangaList,
+        element: <Home />,
+        errorElement: <ErrorMsg />,
+      },
+      {
+        path: "/manga/:id",
+        loader: mangaDetailsLoader,
+        element: <MangaDetails />,
+        errorElement: <ErrorMsg />,
+      },
+      {
+        path: "/search",
+        loader: searchedMangasResults,
+        element: <SearchResults />,
+        errorElement: <ErrorMsg />,
+      },
+    ],
+  },
+]);
+
 function App() {
-  return (
-    <>
-      <Header />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/manga/:id" element={<MangaDetails />} />
-        <Route path="/search" element={<SearchResults />} />
-      </Routes>
-
-      <Footer />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

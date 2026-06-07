@@ -1,11 +1,5 @@
-// Libraries;
-import axios from "axios";
-
-// React Hooks;
-import { useEffect, useState } from "react";
-
 // React-router-dom;
-import { useParams } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 
 // Components;
 import Container from "../components/Container";
@@ -14,51 +8,21 @@ import Loading from "../components/Loading";
 import InfoList from "../components/InfoList";
 import ExpandableText from "../components/ExpandableText";
 import BackButton from "../components/BackButton";
-import ErrorMsg from "../components/ErrorMsg";
 
 export default function MangaDetails() {
-  const [mangaDetails, setMangasDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const mangaDetails = useLoaderData();
 
-  const { id } = useParams();
-
-  const getSelectedMangaDetails = async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const { data: response } = await axios(
-        `https://api.jikan.moe/v4/manga/${id}`,
-      );
-
-      setMangasDetails(response.data);
-    } catch (err) {
-      console.error(err);
-      setError(err.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getSelectedMangaDetails();
-
-    scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [id]);
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
 
   return (
     <section className="bg-bg text-text dark:bg-bg-dark dark:text-text-dark min-h-screen py-12">
       <Container>
         <BackButton />
 
-        {error && <ErrorMsg error={error} onRetry={getSelectedMangaDetails} />}
-        {isLoading && <Loading />}
-
-        {!isLoading && !error && (
+        {isLoading ? (
+          <Loading />
+        ) : (
           <main className="min-h-screen py-10">
             <div className="mx-auto max-w-6xl">
               {/* TOP SECTION */}

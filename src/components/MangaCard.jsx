@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 
 export default function MangaCard({ manga }) {
   return (
-    <Link to={`/manga/${manga.mal_id}`}>
+    <Link
+      to={`/manga/${manga.mal_id}`}
+      onClick={() =>
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
+    >
       <article className="group border-border bg-surface dark:border-border-dark dark:bg-surface-dark cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Cover */}
         <div className="relative aspect-3/4 overflow-hidden">
