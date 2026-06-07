@@ -15,6 +15,11 @@ export default function Pagination({ pagination }) {
     const params = new URLSearchParams(searchParams);
     params.set("page", page);
     setSearchParams(params);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
