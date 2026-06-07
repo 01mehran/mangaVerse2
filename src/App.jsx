@@ -9,6 +9,7 @@ import {
 // APIs;
 import { topMangaList } from "./services/topMangas.loader";
 import { mangaDetails as mangaDetailsLoader } from "./services/mangaDetails.loader";
+import { searchedMangasResults } from "./services/searchedResults.loader";
 
 // MainLayout;
 import MainLayout from "./layouts/MainLayout";
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
         loader: mangaDetailsLoader,
         element: <MangaDetails />,
       },
-      { path: "/search", element: <SearchResults /> },
+      {
+        path: "/search",
+        loader: searchedMangasResults,
+        element: <SearchResults />,
+      },
     ],
   },
 ]);
