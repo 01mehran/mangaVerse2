@@ -6,8 +6,9 @@ import {
   Routes,
 } from "react-router-dom";
 
-// APi;
+// APIs;
 import { topMangaList } from "./services/topMangas.loader";
+import { mangaDetails as mangaDetailsLoader } from "./services/mangaDetails.loader";
 
 // MainLayout;
 import MainLayout from "./layouts/MainLayout";
@@ -31,10 +32,13 @@ const router = createBrowserRouter([
       {
         path: "/",
         loader: topMangaList,
-
         element: <Home />,
       },
-      { path: "/manga/:id", element: <MangaDetails /> },
+      {
+        path: "/manga/:id",
+        loader: mangaDetailsLoader,
+        element: <MangaDetails />,
+      },
       { path: "/search", element: <SearchResults /> },
     ],
   },
