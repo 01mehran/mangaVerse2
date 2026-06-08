@@ -25,13 +25,18 @@ export default function MangaDetails() {
   const isLoading = navigation.state === "loading";
 
   const [translatedSynopsis, setTranslatedSynopsis] = useState("");
+  const [isTranslating, setIsTranslating] = useState(false);
 
   const handleTranslate = async () => {
+    setIsTranslating(true);
+
     try {
       const result = await translateSynopsis(mangaDetails.synopsis);
       setTranslatedSynopsis(result);
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsTranslating(false);
     }
   };
 
@@ -121,8 +126,12 @@ export default function MangaDetails() {
                     Synopsis
                   </h2>
 
-                  <button onClick={handleTranslate}>
-                    <WandSparkles size={20} className="cursor-pointer" />
+                  <button onClick={handleTranslate} disabled={isTranslating}>
+                    {isTranslating ? (
+                      <span className="dark:border-secondary-dark border-primary pointer-events-none block size-8 animate-spin rounded-full border-2 border-r-0 border-l-0"></span>
+                    ) : (
+                      <WandSparkles size={20} className="cursor-pointer" />
+                    )}
                   </button>
                 </div>
 
