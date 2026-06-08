@@ -1,6 +1,12 @@
 // React-router-dom;
 import { useLoaderData, useNavigation } from "react-router-dom";
 
+// API;
+import { translateSynopsis } from "../services/openai";
+
+// React Hooks;
+import { useState } from "react";
+
 // Components;
 import Container from "../components/Container";
 import MangaCard from "../components/MangaCard";
@@ -9,11 +15,25 @@ import InfoList from "../components/InfoList";
 import ExpandableText from "../components/ExpandableText";
 import BackButton from "../components/BackButton";
 
+// Icons;
+import { WandSparkles } from "lucide-react";
+
 export default function MangaDetails() {
   const mangaDetails = useLoaderData();
 
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
+
+  const [translatedSynopsis, setTranslatedSynopsis] = useState("");
+
+  const handleTranslate = async () => {
+    try {
+      const result = await translateSynopsis(mangaDetails.synopsis);
+      setTranslatedSynopsis(result);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <section className="bg-bg text-text dark:bg-bg-dark dark:text-text-dark min-h-screen py-12">
@@ -96,11 +116,19 @@ export default function MangaDetails() {
 
               {/* SYNOPSIS */}
               <section className="xs:p-8 mt-14 rounded-3xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
-                <h2 className="mb-4 text-2xl font-bold text-indigo-500 dark:text-purple-500">
-                  Synopsis
-                </h2>
+                <div className="flex items-center justify-between">
+                  <h2 className="mb-4 text-2xl font-bold text-indigo-500 dark:text-purple-500">
+                    Synopsis
+                  </h2>
 
-                <ExpandableText text={mangaDetails?.synopsis} />
+                  <button onClick={handleTranslate}>
+                    <WandSparkles size={20} className="cursor-pointer" />
+                  </button>
+                </div>
+
+                <ExpandableText
+                  text={translatedSynopsis || mangaDetails.synopsis}
+                />
               </section>
 
               {mangaDetails?.background && (
