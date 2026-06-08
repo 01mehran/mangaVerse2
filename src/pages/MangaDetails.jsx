@@ -151,6 +151,7 @@ export default function MangaDetails() {
                   text={
                     showTranslation ? translatedSynopsis : mangaDetails.synopsis
                   }
+                  showTranslation={showTranslation}
                 />
               </section>
 

@@ -1,7 +1,7 @@
 // React Hooks:
 import { useState } from "react";
 
-export default function ExpandableText({ text }) {
+export default function ExpandableText({ text, showTranslation }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!text) return null;
@@ -14,7 +14,9 @@ export default function ExpandableText({ text }) {
 
   return (
     <div>
-      <p className="text-text-tertiary dark:text-text-secondary-dark leading-8">
+      <p
+        className={`${showTranslation ? "font-vazir text-right" : ""} dark:text-text-secondary-dark leading-8 font-medium`}
+      >
         {displayedText}
       </p>
 
