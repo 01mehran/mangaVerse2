@@ -27,6 +27,7 @@ export default function MangaDetails() {
   const [translatedSynopsis, setTranslatedSynopsis] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
+  const [error, setError] = useState("");
 
   const handleTranslate = async () => {
     if (translatedSynopsis) {
@@ -35,6 +36,7 @@ export default function MangaDetails() {
     }
 
     setIsTranslating(true);
+    setError("");
 
     try {
       const result = await translateSynopsis(mangaDetails.synopsis);
@@ -42,6 +44,7 @@ export default function MangaDetails() {
       setShowTranslation(true);
     } catch (err) {
       console.error(err);
+      setError(err);
     } finally {
       setIsTranslating(false);
     }
@@ -139,7 +142,7 @@ export default function MangaDetails() {
                     ) : (
                       <article className="group relative">
                         <WandSparkles size={20} className="cursor-pointer" />
-                        <span className="before: absolute -top-4 left-1/2 -translate-x-1/2 scale-50 rounded-lg px-2 text-[12px] text-nowrap opacity-0 transition-all duration-200 ease-in group-hover:-top-7 group-hover:scale-105 group-hover:opacity-100">
+                        <span className="absolute -top-4 left-1/2 -translate-x-1/2 scale-50 rounded-lg px-2 text-[12px] text-nowrap opacity-0 transition-all duration-200 ease-in group-hover:-top-7 group-hover:scale-105 group-hover:opacity-100">
                           {showTranslation ? "English" : "Persian"}
                         </span>
                       </article>
@@ -152,6 +155,7 @@ export default function MangaDetails() {
                     showTranslation ? translatedSynopsis : mangaDetails.synopsis
                   }
                   showTranslation={showTranslation}
+                  error={error}
                 />
               </section>
 

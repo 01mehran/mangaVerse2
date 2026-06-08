@@ -101,6 +101,15 @@ body {
   min-height: 100dvh;
 }
 
+body::selection {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+html.dark body::selection {
+  background-color: var(--color-primary-dark);
+}
+
 /* Firefox */
 html {
   scrollbar-width: thin;

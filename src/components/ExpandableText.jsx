@@ -1,7 +1,7 @@
 // React Hooks:
 import { useState } from "react";
 
-export default function ExpandableText({ text, showTranslation }) {
+export default function ExpandableText({ text, showTranslation, error }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!text) return null;
@@ -13,7 +13,7 @@ export default function ExpandableText({ text, showTranslation }) {
     isExpanded || !isLong ? text : `${text.slice(0, limit)}...`;
 
   return (
-    <div>
+    <div className="relative">
       <p
         className={`${showTranslation ? "font-vazir text-right" : ""} dark:text-text-secondary-dark leading-8 font-medium`}
       >
@@ -27,6 +27,12 @@ export default function ExpandableText({ text, showTranslation }) {
         >
           {isExpanded ? "Show Less" : "Read More"}
         </button>
+      )}
+
+      {error && (
+        <span className="absolute right-4 bottom-px text-[12px] font-medium text-red-500 md:text-sm">
+          Translation Failed!
+        </span>
       )}
     </div>
   );
