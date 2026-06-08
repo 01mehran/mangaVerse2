@@ -137,7 +137,12 @@ export default function MangaDetails() {
                     {isTranslating ? (
                       <span className="dark:border-secondary-dark border-primary pointer-events-none block size-8 animate-spin rounded-full border-2 border-r-0 border-l-0"></span>
                     ) : (
-                      <WandSparkles size={20} className="cursor-pointer" />
+                      <article className="group relative">
+                        <WandSparkles size={20} className="cursor-pointer" />
+                        <span className="before: absolute -top-4 left-1/2 -translate-x-1/2 scale-50 rounded-lg px-2 text-[12px] text-nowrap opacity-0 transition-all duration-200 ease-in group-hover:-top-7 group-hover:scale-105 group-hover:opacity-100">
+                          {showTranslation ? "English" : "Persian"}
+                        </span>
+                      </article>
                     )}
                   </button>
                 </div>
