@@ -26,13 +26,20 @@ export default function MangaDetails() {
 
   const [translatedSynopsis, setTranslatedSynopsis] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
 
   const handleTranslate = async () => {
+    if (translatedSynopsis) {
+      setShowTranslation((prev) => !prev);
+      return;
+    }
+
     setIsTranslating(true);
 
     try {
       const result = await translateSynopsis(mangaDetails.synopsis);
       setTranslatedSynopsis(result);
+      setShowTranslation(true);
     } catch (err) {
       console.error(err);
     } finally {
@@ -136,7 +143,9 @@ export default function MangaDetails() {
                 </div>
 
                 <ExpandableText
-                  text={translatedSynopsis || mangaDetails.synopsis}
+                  text={
+                    showTranslation ? translatedSynopsis : mangaDetails.synopsis
+                  }
                 />
               </section>
 
