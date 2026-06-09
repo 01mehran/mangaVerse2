@@ -6,7 +6,7 @@ const client = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-export async function translateSynopsis(text) {
+export async function translateText(text) {
   const response = await client.chat.completions.create({
     model: import.meta.env.VITE_ARVAN_MODEL,
     messages: [

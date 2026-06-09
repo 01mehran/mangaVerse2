@@ -31,7 +31,7 @@ export default function ExpandableText({ text, showTranslation, error }) {
 
       {error && (
         <span className="absolute right-4 bottom-px text-[12px] font-medium text-red-500 md:text-sm">
-          Translation Failed!
+          {error || "Translation Failed!"}
         </span>
       )}
     </div>
