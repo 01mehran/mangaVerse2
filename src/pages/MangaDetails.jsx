@@ -1,9 +1,6 @@
 // React-router-dom;
 import { useLoaderData, useNavigation } from "react-router-dom";
 
-// React Hooks;
-import { useState } from "react";
-
 // Custom Hooks;
 import useTranslation from "../hooks/useTranslation";
 
@@ -12,8 +9,8 @@ import Container from "../components/Container";
 import MangaCard from "../components/MangaCard";
 import Loading from "../components/Loading";
 import InfoList from "../components/InfoList";
-import ExpandableText from "../components/ExpandableText";
 import BackButton from "../components/BackButton";
+import MangaStorySection from "../components/MangaStorySection";
 
 // Icons;
 import { WandSparkles } from "lucide-react";
@@ -107,87 +104,18 @@ export default function MangaDetails() {
               </section>
 
               {/* SYNOPSIS */}
-              <section className="xs:p-8 mt-14 rounded-3xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
-                <div className="flex items-center justify-between">
-                  <h2 className="mb-4 text-2xl font-bold text-indigo-500 dark:text-purple-500">
-                    Synopsis
-                  </h2>
+              <MangaStorySection
+                title="Synopsis"
+                story={mangaDetails?.synopsis}
+                translation={synopsisTranslation}
+              />
 
-                  <button
-                    onClick={() =>
-                      synopsisTranslation.handleTranslate(
-                        mangaDetails?.synopsis,
-                      )
-                    }
-                    disabled={synopsisTranslation.isTranslating}
-                  >
-                    {synopsisTranslation.isTranslating ? (
-                      <span className="dark:border-secondary-dark border-primary pointer-events-none block size-8 animate-spin rounded-full border-2 border-r-0 border-l-0"></span>
-                    ) : (
-                      <article className="group relative">
-                        <WandSparkles size={20} className="cursor-pointer" />
-                        <span className="absolute -top-4 left-1/2 -translate-x-1/2 scale-50 rounded-lg px-2 text-[12px] text-nowrap opacity-0 transition-all duration-200 ease-in group-hover:-top-7 group-hover:scale-105 group-hover:opacity-100">
-                          {synopsisTranslation.showTranslation
-                            ? "English"
-                            : "Persian"}
-                        </span>
-                      </article>
-                    )}
-                  </button>
-                </div>
-
-                <ExpandableText
-                  text={
-                    synopsisTranslation.showTranslation
-                      ? synopsisTranslation.translatedText
-                      : mangaDetails?.synopsis
-                  }
-                  showTranslation={synopsisTranslation.showTranslation}
-                  error={synopsisTranslation.error}
-                />
-              </section>
-
-              {mangaDetails?.background && (
-                <section className="xs:p-8 mt-14 rounded-3xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
-                  <div className="flex items-center justify-between">
-                    <h2 className="mb-4 text-2xl font-bold text-indigo-500 dark:text-purple-500">
-                      Background
-                    </h2>
-
-                    <button
-                      onClick={() =>
-                        backgroundTranslation.handleTranslate(
-                          mangaDetails?.background,
-                        )
-                      }
-                      disabled={backgroundTranslation.isTranslating}
-                    >
-                      {backgroundTranslation.isTranslating ? (
-                        <span className="dark:border-secondary-dark border-primary pointer-events-none block size-8 animate-spin rounded-full border-2 border-r-0 border-l-0"></span>
-                      ) : (
-                        <article className="group relative">
-                          <WandSparkles size={20} className="cursor-pointer" />
-                          <span className="absolute -top-4 left-1/2 -translate-x-1/2 scale-50 rounded-lg px-2 text-[12px] text-nowrap opacity-0 transition-all duration-200 ease-in group-hover:-top-7 group-hover:scale-105 group-hover:opacity-100">
-                            {backgroundTranslation.showTranslation
-                              ? "English"
-                              : "Persian"}
-                          </span>
-                        </article>
-                      )}
-                    </button>
-                  </div>
-
-                  <ExpandableText
-                    text={
-                      backgroundTranslation.showTranslation
-                        ? backgroundTranslation.translatedText
-                        : mangaDetails?.background
-                    }
-                    showTranslation={backgroundTranslation.showTranslation}
-                    error={backgroundTranslation.error}
-                  />
-                </section>
-              )}
+              {/* Background */}
+              <MangaStorySection
+                title="Background"
+                story={mangaDetails?.background}
+                translation={backgroundTranslation}
+              />
             </div>
           </main>
         )}
