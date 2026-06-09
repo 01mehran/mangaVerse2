@@ -104,18 +104,22 @@ export default function MangaDetails() {
               </section>
 
               {/* SYNOPSIS */}
-              <MangaStorySection
-                title="Synopsis"
-                story={mangaDetails?.synopsis}
-                translation={synopsisTranslation}
-              />
+              {mangaDetails?.synopsis && (
+                <MangaStorySection
+                  title="Synopsis"
+                  story={mangaDetails?.synopsis}
+                  translation={synopsisTranslation}
+                />
+              )}
 
               {/* Background */}
-              <MangaStorySection
-                title="Background"
-                story={mangaDetails?.background}
-                translation={backgroundTranslation}
-              />
+              {mangaDetails?.background && (
+                <MangaStorySection
+                  title="Background"
+                  story={mangaDetails?.background}
+                  translation={backgroundTranslation}
+                />
+              )}
             </div>
           </main>
         )}
