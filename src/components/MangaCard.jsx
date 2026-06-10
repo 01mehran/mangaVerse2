@@ -16,7 +16,7 @@ export default function MangaCard({ manga }) {
         {/* Cover */}
         <div className="relative aspect-3/4 overflow-hidden">
           <img
-            src={manga?.images?.jpg?.image_url}
+            src={manga?.images?.jpg?.large_image_url}
             alt={`Cover of ${manga.title}`}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"

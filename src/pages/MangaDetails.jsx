@@ -39,7 +39,7 @@ export default function MangaDetails() {
                 {/* COVER */}
                 <div className="border-border dark:border-border-dark aspect-3/4 w-full overflow-hidden rounded-3xl border shadow-lg transition hover:scale-[1.02] md:sticky md:top-34 dark:shadow-xl">
                   <img
-                    src={mangaDetails?.images?.jpg?.image_url}
+                    src={mangaDetails?.images?.jpg?.large_image_url}
                     alt={`Cover of ${mangaDetails?.title}`}
                     className="h-full w-full object-cover"
                     loading="lazy"

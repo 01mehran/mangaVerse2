@@ -11,6 +11,11 @@ export default function useTranslation() {
   const [error, setError] = useState("");
 
   const handleTranslate = async (text) => {
+    if (!import.meta.env.VITE_ARVAN_API_KEY) {
+      setError("Translation is unavailable.");
+      return;
+    }
+
     if (translatedText) {
       setShowTranslation((prev) => !prev);
       return;
@@ -26,7 +31,7 @@ export default function useTranslation() {
       setShowTranslation(true);
     } catch (err) {
       console.error(err);
-      setError(err instanceof Error ? err.message : String(err));
+      setError("Translation is unavailable.");
     } finally {
       setIsTranslating(false);
     }
