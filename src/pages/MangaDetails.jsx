@@ -1,19 +1,28 @@
 // React-router-dom;
 import { useLoaderData, useNavigation } from "react-router-dom";
 
+// Custom Hooks;
+import useTranslation from "../hooks/useTranslation";
+
 // Components;
 import Container from "../components/Container";
 import MangaCard from "../components/MangaCard";
 import Loading from "../components/Loading";
 import InfoList from "../components/InfoList";
-import ExpandableText from "../components/ExpandableText";
 import BackButton from "../components/BackButton";
+import MangaStorySection from "../components/MangaStorySection";
+
+// Icons;
+import { WandSparkles } from "lucide-react";
 
 export default function MangaDetails() {
   const mangaDetails = useLoaderData();
 
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
+
+  const synopsisTranslation = useTranslation();
+  const backgroundTranslation = useTranslation();
 
   return (
     <section className="bg-bg text-text dark:bg-bg-dark dark:text-text-dark min-h-screen py-12">
@@ -30,7 +39,7 @@ export default function MangaDetails() {
                 {/* COVER */}
                 <div className="border-border dark:border-border-dark aspect-3/4 w-full overflow-hidden rounded-3xl border shadow-lg transition hover:scale-[1.02] md:sticky md:top-34 dark:shadow-xl">
                   <img
-                    src={mangaDetails?.images?.jpg?.image_url}
+                    src={mangaDetails?.images?.jpg?.large_image_url}
                     alt={`Cover of ${mangaDetails?.title}`}
                     className="h-full w-full object-cover"
                     loading="lazy"
@@ -95,22 +104,21 @@ export default function MangaDetails() {
               </section>
 
               {/* SYNOPSIS */}
-              <section className="xs:p-8 mt-14 rounded-3xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
-                <h2 className="mb-4 text-2xl font-bold text-indigo-500 dark:text-purple-500">
-                  Synopsis
-                </h2>
+              {mangaDetails?.synopsis && (
+                <MangaStorySection
+                  title="Synopsis"
+                  story={mangaDetails?.synopsis}
+                  translation={synopsisTranslation}
+                />
+              )}
 
-                <ExpandableText text={mangaDetails?.synopsis} />
-              </section>
-
+              {/* Background */}
               {mangaDetails?.background && (
-                <section className="xs:p-8 mt-10 rounded-3xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
-                  <h2 className="mb-4 text-2xl font-bold text-indigo-500 dark:text-purple-500">
-                    Background
-                  </h2>
-
-                  <ExpandableText text={mangaDetails?.background} />
-                </section>
+                <MangaStorySection
+                  title="Background"
+                  story={mangaDetails?.background}
+                  translation={backgroundTranslation}
+                />
               )}
             </div>
           </main>

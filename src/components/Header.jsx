@@ -1,5 +1,10 @@
 // React-router-dom;
-import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
+import {
+  createSearchParams,
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 // React Hooks;
 import { useContext, useEffect, useState } from "react";
@@ -45,10 +50,12 @@ export default function Header() {
       <Container>
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <article className="text-xl font-bold tracking-wide">
-            <span className="text-text dark:text-text-dark">manga</span>
-            <span className="text-primary dark:text-primary-dark">Verse</span>
-          </article>
+          <Link to="/">
+            <article className="text-xl font-bold tracking-wide">
+              <span className="text-text dark:text-text-dark">manga</span>
+              <span className="text-primary dark:text-primary-dark">Verse</span>
+            </article>
+          </Link>
 
           <Input
             className="hidden w-110 md:flex lg:w-150"
