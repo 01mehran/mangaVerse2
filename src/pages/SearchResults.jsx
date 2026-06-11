@@ -23,14 +23,14 @@ export default function SearchResults() {
   const isLoading = navigation.state === "loading";
 
   return (
-    <section className="bg-bg dark:bg-bg-dark min-h-screen py-12">
+    <section className="bg-bg dark:bg-bg-dark min-h-screen">
       <BackToTopButton />
 
       <Container>
         {/* Back button */}
-        <BackButton />
 
-        <main className="min-h-screen">
+        <main className="min-h-screen pt-6 md:pt-8">
+          <BackButton />
           {isLoading && <Loading />}
 
           {/* Empty state */}
@@ -50,7 +50,7 @@ export default function SearchResults() {
           {!isLoading && searchedManga.length > 0 && (
             <>
               {/* Search title */}
-              <h1 className="text-text dark:text-text-dark mb-8 text-xl font-bold md:text-2xl">
+              <h1 className="text-text dark:text-text-dark mb-3 text-xl font-bold md:mb-4 md:text-2xl">
                 Search results for:
                 <span className="text-primary dark:text-primary-dark-light ml-3">
                   "{query}"

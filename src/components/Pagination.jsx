@@ -23,7 +23,7 @@ export default function Pagination({ pagination }) {
   };
 
   return (
-    <div className="flex justify-center gap-3 bg-slate-100 py-6 dark:bg-gray-950 dark:text-slate-200">
+    <div className="flex justify-center gap-3 bg-slate-100 py-10 dark:bg-gray-950 dark:text-slate-200">
       <>
         <button
           disabled={pagination?.current_page === 1}
