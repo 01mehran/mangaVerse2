@@ -1,8 +1,11 @@
 import React from "react";
 
-export default function ModalSearchedManga({ manga }) {
+export default function ModalSearchedManga({ manga, onSelect }) {
   return (
-    <div className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div
+      onClick={() => onSelect(manga)}
+      className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+    >
       {/* Image */}
       <img
         src={manga.images.jpg.image_url}

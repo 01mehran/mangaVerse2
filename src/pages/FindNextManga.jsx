@@ -9,10 +9,18 @@ import Container from "../components/Container";
 import BackButton from "../components/BackButton";
 import MangaSlot from "../components/MangaSlot";
 import MangaModal from "../components/MangaModal";
+import { useSearchManga } from "../hooks/useSearchManga";
 
 export default function FindNextManga() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
+  const [selectedMangas, setSelectedMangas] = useState({
+    1: null,
+    2: null,
+    3: null,
+  });
+
+  const { setQuery, setSearchedManga } = useSearchManga();
 
   const { topMangas } = useLoaderData();
   const navigation = useNavigation();
@@ -21,6 +29,18 @@ export default function FindNextManga() {
   const handleClick = (slotIndex) => {
     setActiveSlot(slotIndex);
     setIsOpen(true);
+  };
+
+  const handleSelectmanga = (manga) => {
+    setSelectedMangas((prev) => ({
+      ...prev,
+      [activeSlot]: manga,
+    }));
+
+    setIsOpen(false);
+    setQuery("");
+    setSearchedManga([]);
+    console.log(selectedMangas);
   };
 
   return (
@@ -50,10 +70,12 @@ export default function FindNextManga() {
         <section className="pb-10">
           <div className="grid gap-5 md:grid-cols-3">
             {/* Slot - 1  */}
+
             <MangaSlot
               title="Select Manga #1"
               value="Select Manga +"
               onClick={() => handleClick(1)}
+              selectedMangas={selectedMangas[1]}
             />
 
             {/* Slot - 2  */}
@@ -61,6 +83,7 @@ export default function FindNextManga() {
               title="Select Manga #2"
               value="Select Manga +"
               onClick={() => handleClick(2)}
+              selectedMangas={selectedMangas[2]}
             />
 
             {/* Slot - 3  */}
@@ -68,6 +91,7 @@ export default function FindNextManga() {
               title="Select Manga #3"
               value="Select Manga +"
               onClick={() => handleClick(3)}
+              selectedMangas={selectedMangas[3]}
             />
           </div>
         </section>
@@ -85,6 +109,7 @@ export default function FindNextManga() {
           topMangas={topMangas}
           loadingTopMangas={loadingTopMangas}
           isOpen={isOpen}
+          onSelect={handleSelectmanga}
         />
       )}
     </main>

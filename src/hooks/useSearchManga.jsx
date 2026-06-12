@@ -39,5 +39,6 @@ export function useSearchManga() {
     setQuery,
     searchedManga,
     loadingSearch,
+    setSearchedManga,
   };
 }

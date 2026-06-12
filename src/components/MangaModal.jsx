@@ -15,6 +15,7 @@ export default function MangaModal({
   topMangas,
   loadingTopMangas,
   isOpen,
+  onSelect,
 }) {
   const { query, setQuery, searchedManga, loadingSearch } = useSearchManga();
 
@@ -68,14 +69,22 @@ export default function MangaModal({
               <ModalSeachSkelton />
             ) : (
               searchedManga?.map((manga) => (
-                <ModalSearchedManga key={manga.mal_id} manga={manga} />
+                <ModalSearchedManga
+                  key={manga.mal_id}
+                  manga={manga}
+                  onSelect={onSelect}
+                />
               ))
             )
           ) : loadingTopMangas ? (
             "loading ..."
           ) : (
             topMangas?.map((manga) => (
-              <ModalMangaCard key={manga.mal_id} manga={manga} />
+              <ModalMangaCard
+                key={manga.mal_id}
+                manga={manga}
+                onSelect={onSelect}
+              />
             ))
           )}
         </div>
