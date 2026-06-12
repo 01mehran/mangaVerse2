@@ -1,7 +1,9 @@
-
-export default function MangaSlot({ title, value }) {
+export default function MangaSlot({ title, value, onClick }) {
   return (
-    <div className="border-border bg-surface dark:border-border-dark dark:bg-surface-dark rounded-2xl border p-5">
+    <div
+      onClick={onClick}
+      className="border-border bg-surface dark:border-border-dark dark:bg-surface-dark rounded-2xl border p-5"
+    >
       <h3 className="text-text dark:text-text-dark mb-4 font-semibold">
         {title}
       </h3>

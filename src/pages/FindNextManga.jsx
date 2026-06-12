@@ -1,9 +1,21 @@
+// React Hooks;
+import { useState } from "react";
+
 // Components;
 import Container from "../components/Container";
 import BackButton from "../components/BackButton";
 import MangaSlot from "../components/MangaSlot";
+import MangaModal from "../components/MangaModal";
 
 export default function FindNextManga() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeSlot, setActiveSlot] = useState(null);
+
+  const handleClick = (slotIndex) => {
+    setActiveSlot(slotIndex);
+    setIsOpen(true);
+  };
+
   return (
     <main className="bg-bg dark:bg-bg-dark min-h-screen">
       <Container>
@@ -31,13 +43,25 @@ export default function FindNextManga() {
         <section className="pb-10">
           <div className="grid gap-5 md:grid-cols-3">
             {/* Slot - 1  */}
-            <MangaSlot title="Select Manga #1" value="Select Manga +" />
+            <MangaSlot
+              title="Select Manga #1"
+              value="Select Manga +"
+              onClick={() => handleClick(1)}
+            />
 
             {/* Slot - 2  */}
-            <MangaSlot title="Select Manga #2" value="Select Manga +" />
+            <MangaSlot
+              title="Select Manga #2"
+              value="Select Manga +"
+              onClick={() => handleClick(2)}
+            />
 
             {/* Slot - 3  */}
-            <MangaSlot title="Select Manga #3" value="Select Manga +" />
+            <MangaSlot
+              title="Select Manga #3"
+              value="Select Manga +"
+              onClick={() => handleClick(3)}
+            />
           </div>
         </section>
 
@@ -47,6 +71,8 @@ export default function FindNextManga() {
           </button>
         </section>
       </Container>
+
+      {isOpen && <MangaModal onClose={() => setIsOpen(false)} />}
     </main>
   );
 }
