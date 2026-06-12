@@ -1,3 +1,6 @@
+// React Hooks;
+import { useEffect } from "react";
+
 // Custom Hooks;
 import { useSearchManga } from "../hooks/useSearchManga";
 
@@ -8,7 +11,6 @@ import ModalMangaCard from "./ModalMangaCard";
 
 // Icons;
 import { X } from "lucide-react";
-import { useEffect } from "react";
 
 export default function MangaModal({
   onClose,
@@ -32,8 +34,13 @@ export default function MangaModal({
   }, [isOpen]);
 
   return (
-    <div className="fixed inset-0 z-50 mx-2 flex items-center justify-center bg-black/60 dark:bg-black/70">
-      <div className="h-112.5 w-105 overflow-hidden rounded-2xl bg-white text-gray-900 shadow-xl dark:bg-gray-900 dark:text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Layer; */}
+      <div
+        onClick={onClose}
+        className="fixed inset-0 z-40 bg-black/5 backdrop-blur-sm dark:bg-black/5"
+      ></div>
+      <div className="z-50 h-112.5 w-105 overflow-hidden rounded-2xl bg-white text-gray-900 shadow-xl dark:bg-gray-900 dark:text-white">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-700">
           <h2 className="text-lg font-semibold">Select a Manga</h2>

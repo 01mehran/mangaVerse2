@@ -4,12 +4,14 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 // React Hooks;
 import { useState } from "react";
 
+// Custom Hooks;
+import { useSearchManga } from "../hooks/useSearchManga";
+
 // Components;
 import Container from "../components/Container";
 import BackButton from "../components/BackButton";
 import MangaSlot from "../components/MangaSlot";
 import MangaModal from "../components/MangaModal";
-import { useSearchManga } from "../hooks/useSearchManga";
 
 export default function FindNextManga() {
   const [isOpen, setIsOpen] = useState(false);
