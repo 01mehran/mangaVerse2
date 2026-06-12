@@ -1,3 +1,6 @@
+// React-router-dom;
+import { useLoaderData, useNavigation } from "react-router-dom";
+
 // React Hooks;
 import { useState } from "react";
 
@@ -10,6 +13,10 @@ import MangaModal from "../components/MangaModal";
 export default function FindNextManga() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
+
+  const { topMangas } = useLoaderData();
+  const navigation = useNavigation();
+  const loadingTopMangas = navigation.state === "loading";
 
   const handleClick = (slotIndex) => {
     setActiveSlot(slotIndex);
@@ -72,7 +79,13 @@ export default function FindNextManga() {
         </section>
       </Container>
 
-      {isOpen && <MangaModal onClose={() => setIsOpen(false)} />}
+      {isOpen && (
+        <MangaModal
+          onClose={() => setIsOpen(false)}
+          topMangas={topMangas}
+          loadingTopMangas={loadingTopMangas}
+        />
+      )}
     </main>
   );
 }

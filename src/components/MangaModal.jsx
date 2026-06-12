@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-export default function MangaModal({ onClose }) {
+export default function MangaModal({ onClose, topMangas, loadingTopMangas }) {
   return (
     <div className="fixed inset-0 z-50 mx-2 flex items-center justify-center bg-black/60 dark:bg-black/70">
       <div className="h-112.5 w-105 overflow-hidden rounded-2xl bg-white text-gray-900 shadow-xl dark:bg-gray-900 dark:text-white">
@@ -31,7 +31,30 @@ export default function MangaModal({ onClose }) {
         </div>
 
         {/* List */}
-        <div className="flex max-h-75 flex-col gap-3 overflow-y-auto px-4 pb-4"></div>
+        <div className="flex max-h-75 flex-col gap-3 overflow-y-auto px-4 pb-4">
+          {loadingTopMangas
+            ? "Top mangas ..."
+            : topMangas.map((manga) => (
+                <div
+                  key={manga.mal_id}
+                  className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                >
+                  <img
+                    src={manga.images.jpg.image_url}
+                    alt={`cover of ${manga.title}`}
+                    className="h-14 w-10 rounded object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <p className="line-clamp-1 text-sm font-semibold text-gray-900 dark:text-white">
+                      {manga.title}
+                    </p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      ⭐ {manga.score ?? "N/A"} • Rank #{manga.rank ?? "?"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+        </div>
       </div>
     </div>
   );

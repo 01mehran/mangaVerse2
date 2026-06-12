@@ -53,6 +53,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/find-next-manga",
+        loader: topMangaList,
         element: <FindYourNextManga />,
       },
       {
