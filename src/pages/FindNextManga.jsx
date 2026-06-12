@@ -84,6 +84,7 @@ export default function FindNextManga() {
           onClose={() => setIsOpen(false)}
           topMangas={topMangas}
           loadingTopMangas={loadingTopMangas}
+          isOpen={isOpen}
         />
       )}
     </main>

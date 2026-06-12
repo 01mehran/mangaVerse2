@@ -15,8 +15,7 @@ export default function ModalSearchedManga({ manga }) {
           {manga.title}
         </p>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          ⭐ {manga.score ?? "N/A"} • Rank #{manga.rank ?? "?"} id{" "}
-          {manga.mal_id}
+          ⭐ {manga.score ?? "N/A"} • Rank #{manga.rank ?? "?"}
         </p>
       </div>
     </div>

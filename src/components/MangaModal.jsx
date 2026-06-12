@@ -8,9 +8,27 @@ import ModalMangaCard from "./ModalMangaCard";
 
 // Icons;
 import { X } from "lucide-react";
+import { useEffect } from "react";
 
-export default function MangaModal({ onClose, topMangas, loadingTopMangas }) {
+export default function MangaModal({
+  onClose,
+  topMangas,
+  loadingTopMangas,
+  isOpen,
+}) {
   const { query, setQuery, searchedManga, loadingSearch } = useSearchManga();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   return (
     <div className="fixed inset-0 z-50 mx-2 flex items-center justify-center bg-black/60 dark:bg-black/70">
