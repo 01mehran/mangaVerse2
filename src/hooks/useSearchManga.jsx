@@ -6,12 +6,12 @@ import axios from "axios";
 
 export function useSearchManga() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+  const [searchedManga, setSearchedManga] = useState([]);
   const [loadingSearch, setLoadingSearch] = useState(false);
 
   useEffect(() => {
     if (!query) {
-      setResults([]);
+      setSearchedManga([]);
       return;
     }
 
@@ -23,7 +23,7 @@ export function useSearchManga() {
           `https://api.jikan.moe/v4/manga?q=${query}`,
         );
 
-        setResults(response.data || []);
+        setSearchedManga(response.data || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -37,7 +37,7 @@ export function useSearchManga() {
   return {
     query,
     setQuery,
-    results,
+    searchedManga,
     loadingSearch,
   };
 }
