@@ -22,10 +22,26 @@ import ModalMangaCard from "../components/ModalMangaCard";
 export default function FindNextManga() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
-  const [selectedMangas, setSelectedMangas] = useState([null, null, null]);
-  const [recommendedMangas, setRecommendedMangas] = useState([]);
   const [loadingRecommended, setLoadingRecommended] = useState(false);
-  
+
+  const [selectedMangas, setSelectedMangas] = useState(() => {
+    const saved = localStorage.getItem("selectedMangas");
+    return saved ? JSON.parse(saved) : [null, null, null];
+  });
+
+  const [recommendedMangas, setRecommendedMangas] = useState(() => {
+    const saved = localStorage.getItem("savedManga");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("selectedMangas", JSON.stringify(selectedMangas));
+  }, [selectedMangas]);
+
+  useEffect(() => {
+    localStorage.setItem("savedManga", JSON.stringify(recommendedMangas));
+  }, [recommendedMangas]);
+
   const { setQuery, setSearchedManga } = useSearchManga();
 
   const { topMangas } = useLoaderData();
@@ -108,8 +124,8 @@ export default function FindNextManga() {
                   </h1>
 
                   <p className="text-text-muted dark:text-text-muted-dark mt-4 text-base md:text-lg">
-                    Pick 3 manga you enjoyed and we'll recommend similar titles
-                    based on genres and themes.
+                    Pick 3 manga you enjoyed and we'll recommend similar mangas
+                    based on genres.
                   </p>
                 </div>
               </div>
@@ -144,15 +160,17 @@ export default function FindNextManga() {
               </div>
             </section>
 
-            <section className="pb-14 text-center">
+            <section className="pb-10 text-center">
               <button
-                disabled={isDisabled}
+                disabled={isDisabled || loadingRecommended}
                 onClick={handleFindNextManga}
-                className="bg-primary hover:bg-primary/90 dark:bg-primary-dark/70 dark:hover:bg-primary-dark/80 text-md cursor-pointer rounded-xl px-5 py-3 text-[14px] font-semibold text-white transition disabled:pointer-events-none disabled:opacity-50 sm:px-6 sm:py-4"
+                className="bg-primary hover:bg-primary/90 dark:bg-primary-dark/70 dark:hover:bg-primary-dark/80 text-md h-10 w-54 cursor-pointer rounded-xl px-5 text-[14px] font-semibold text-white transition disabled:pointer-events-none disabled:opacity-80 sm:px-6 md:w-72"
               >
-                {loadingRecommended
-                  ? "Finding your next manga..."
-                  : "Find My Next Manga"}
+                {loadingRecommended ? (
+                  <span className="dark:border-secondary-dark border-primary pointer-events-none mx-auto inline-block size-4 animate-spin rounded-xl border-2 border-r-0 border-l-0"></span>
+                ) : (
+                  "Show Similar Mangas "
+                )}
               </button>
             </section>
 
@@ -161,10 +179,7 @@ export default function FindNextManga() {
                 <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 overflow-scroll md:grid-cols-3 lg:grid-cols-4">
                   {recommendedMangas.map((manga) => (
                     <Link to={`/manga/${manga.mal_id}`} key={manga.mal_id}>
-                      <div
-                        key={manga.mal_id}
-                        className="shadow-card flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
-                      >
+                      <div className="shadow-card flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
                         {/* Image */}
                         <img
                           src={manga?.images?.jpg?.image_url}
