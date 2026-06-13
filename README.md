@@ -38,19 +38,19 @@ A modern manga discovery application built with React and Tailwindcss, powered b
 
 ### Home Page
 
-_Add screenshot here_
+![Home Page](./src/assets/screenShots/homepage.png)
 
 ### Manga Details
 
-_Add screenshot here_
+![Manga Details Page](./src/assets/screenShots/mangaDetails.png)
 
-### Compare Manga
+### Searched Manga
 
-_Add screenshot here_
+![Searched Manga Page](./src/assets/screenShots/searchedmanga.png)
 
 ### Recommendations
 
-_Add screenshot here_
+![Recommendation Page](./src/assets/screenShots/recommendation.png)
 
 ---
 
