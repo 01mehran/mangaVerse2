@@ -8,17 +8,25 @@ export default function ModalSearchedManga({ manga, onSelect }) {
     >
       {/* Image */}
       <img
-        src={manga.images.jpg.image_url}
+        src={manga?.images?.jpg?.image_url}
         alt={manga.title}
         className="h-14 w-10 rounded object-cover"
       />
       {/* Text */}
-      <div className="flex flex-col">
+      <div className="flex flex-col space-y-1">
         <p className="line-clamp-1 text-sm font-semibold text-gray-900 dark:text-white">
-          {manga.title}
+          {manga?.title ?? "N/A"}
         </p>
+        <div className="text-xs text-gray-500 dark:text-gray-300">
+          {manga?.genres.length > 0
+            ? manga?.genres
+                .slice(0, 2)
+                .map((g) => g.name)
+                .join(" , ")
+            : "no jenres"}
+        </div>
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          ⭐ {manga.score ?? "N/A"} • Rank #{manga.rank ?? "?"}
+          ⭐ {manga?.score?.toFixed(1) ?? "N/A"} • Rank #{manga?.rank ?? "?"}
         </p>
       </div>
     </div>
