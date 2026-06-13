@@ -25,6 +25,7 @@ import Home from "./pages/Home";
 import MangaDetails from "./pages/MangaDetails";
 import SearchResults from "./pages/SearchResults";
 import NotFound from "./pages/NotFound";
+import FindYourNextManga from "./pages/FindNextManga";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
         loader: searchedMangasResults,
         element: <SearchResults />,
         errorElement: <ErrorMsg />,
+      },
+      {
+        path: "/find-next-manga",
+        loader: topMangaList,
+        element: <FindYourNextManga />,
       },
       {
         path: "*",

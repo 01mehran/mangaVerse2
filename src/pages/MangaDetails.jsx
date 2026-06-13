@@ -25,14 +25,14 @@ export default function MangaDetails() {
   const backgroundTranslation = useTranslation();
 
   return (
-    <section className="bg-bg text-text dark:bg-bg-dark dark:text-text-dark min-h-screen py-12">
+    <section className="bg-bg text-text dark:bg-bg-dark dark:text-text-dark min-h-screen py-6 md:py-8">
       <Container>
         <BackButton />
 
         {isLoading ? (
           <Loading />
         ) : (
-          <main className="min-h-screen py-10">
+          <main className="min-h-screen pb-10">
             <div className="mx-auto max-w-6xl">
               {/* TOP SECTION */}
               <section className="grid grid-cols-1 gap-10 md:grid-cols-[320px_1fr]">
