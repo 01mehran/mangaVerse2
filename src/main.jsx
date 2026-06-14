@@ -8,7 +8,7 @@ import "./index.css";
 import App from "./App.jsx";
 
 // Theme Context Provider;
-import { ThemeContextProvider } from "./ThemeContext.jsx";
+import { ThemeContextProvider } from "./contexts/ThemeContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
