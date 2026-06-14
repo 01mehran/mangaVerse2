@@ -113,34 +113,21 @@ export default function FindNextManga() {
           <Loading />
         ) : (
           <main>
+            {/* Hero */}
             <FindNextMangaHero />
 
+            {/* Slots */}
             <section className="py-10">
               <div className="grid gap-5 md:grid-cols-3">
-                {/* Slot - 1  */}
-
-                <MangaSlot
-                  title="Select Manga #1"
-                  value="Select Manga +"
-                  onClick={() => handleClick(0)}
-                  selectedMangas={selectedMangas[0]}
-                />
-
-                {/* Slot - 2  */}
-                <MangaSlot
-                  title="Select Manga #2"
-                  value="Select Manga +"
-                  onClick={() => handleClick(1)}
-                  selectedMangas={selectedMangas[1]}
-                />
-
-                {/* Slot - 3  */}
-                <MangaSlot
-                  title="Select Manga #3"
-                  value="Select Manga +"
-                  onClick={() => handleClick(2)}
-                  selectedMangas={selectedMangas[2]}
-                />
+                {selectedMangas.map((manga, index) => (
+                  <MangaSlot
+                    key={index}
+                    title={`Select Manga #${index + 1}`}
+                    value="Select Manga +"
+                    onClick={() => handleClick(index)}
+                    selectedMangas={manga}
+                  />
+                ))}
               </div>
             </section>
 
