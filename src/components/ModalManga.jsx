@@ -6,13 +6,12 @@ import { useSearchManga } from "../hooks/useSearchManga";
 
 // Components
 import ModalSeachSkelton from "./ModalSeachSkelton";
-import ModalSearchedManga from "./modalSearchedManga";
 import ModalMangaCard from "./ModalMangaCard";
 
 // Icons;
 import { X } from "lucide-react";
 
-export default function MangaModal({
+export default function ModalManga({
   onClose,
   topMangas,
   loadingTopMangas,
@@ -20,6 +19,10 @@ export default function MangaModal({
   onSelect,
 }) {
   const { query, setQuery, searchedManga, loadingSearch } = useSearchManga();
+
+  const isSearching = !!query;
+  const isLoading = isSearching ? loadingSearch : loadingTopMangas;
+  const mangas = isSearching ? searchedManga : topMangas;
 
   useEffect(() => {
     if (isOpen) {
@@ -64,29 +67,15 @@ export default function MangaModal({
           />
         </div>
 
-        {/* Top Mangas */}
         <div className="px-4 pb-2">
           <p className="text-sm text-gray-500 dark:text-gray-400">Top Mangas</p>
         </div>
 
-        {/* List */}
         <div className="flex max-h-75 flex-col gap-3 overflow-y-auto px-4 pb-4">
-          {query ? (
-            loadingSearch ? (
-              <ModalSeachSkelton />
-            ) : (
-              searchedManga?.map((manga) => (
-                <ModalSearchedManga
-                  key={manga.mal_id}
-                  manga={manga}
-                  onSelect={onSelect}
-                />
-              ))
-            )
-          ) : loadingTopMangas ? (
-            "loading ..."
+          {isLoading ? (
+            <ModalSeachSkelton />
           ) : (
-            topMangas?.map((manga) => (
+            mangas?.map((manga) => (
               <ModalMangaCard
                 key={manga.mal_id}
                 manga={manga}

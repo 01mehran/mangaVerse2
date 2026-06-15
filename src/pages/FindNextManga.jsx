@@ -14,11 +14,11 @@ import { useSearchManga } from "../hooks/useSearchManga";
 import Container from "../components/Container";
 import BackButton from "../components/BackButton";
 import MangaSlot from "../components/MangaSlot";
-import MangaModal from "../components/MangaModal";
 import Loading from "../components/Loading";
 import MangaCard from "../components/MangaCard";
 import ModalMangaCard from "../components/ModalMangaCard";
 import FindNextMangaHero from "../components/FindNextMangaHero";
+import ModalManga from "../components/ModalManga";
 
 export default function FindNextManga() {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,11 +131,12 @@ export default function FindNextManga() {
               </div>
             </section>
 
+            {/* Button */}
             <section className="pb-10 text-center">
               <button
                 disabled={isDisabled || loadingRecommended}
                 onClick={handleFindNextManga}
-                className="bg-primary hover:bg-primary/90 dark:bg-primary-dark/70 dark:hover:bg-primary-dark/80 text-md h-10 w-54 cursor-pointer rounded-xl px-5 text-[14px] font-semibold text-white transition disabled:pointer-events-none disabled:opacity-80 sm:px-6 md:w-72"
+                className="bg-primary hover:bg-primary/90 dark:bg-primary-dark/70 dark:hover:bg-primary-dark/80 text-md h-10 w-54 cursor-pointer rounded-xl px-5 text-[14px] font-semibold text-white transition disabled:pointer-events-none disabled:opacity-60 sm:px-6 md:w-72"
               >
                 {loadingRecommended ? (
                   <span className="dark:border-secondary-dark border-primary pointer-events-none mx-auto inline-block size-4 animate-spin rounded-xl border-2 border-r-0 border-l-0"></span>
@@ -145,46 +146,26 @@ export default function FindNextManga() {
               </button>
             </section>
 
-            {recommendedMangas.length > 0 && (
-              <section>
+            <section>
+              {recommendedMangas.length > 0 && (
                 <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 overflow-scroll md:grid-cols-3 lg:grid-cols-4">
                   {recommendedMangas.map((manga) => (
-                    <Link to={`/manga/${manga.mal_id}`} key={manga.mal_id}>
-                      <div className="shadow-card flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
-                        {/* Image */}
-                        <img
-                          src={manga?.images?.jpg?.image_url}
-                          alt={manga?.title}
-                          className="h-14 w-10 rounded object-cover"
-                        />
-                        <div className="flex flex-col space-y-1">
-                          <p className="line-clamp-1 text-sm font-semibold text-gray-900 dark:text-white">
-                            {manga?.title ?? "N/A"}
-                          </p>
-
-                          <div className="text-xs text-gray-500 dark:text-gray-300">
-                            {manga?.genres.length > 0
-                              ? manga?.genres
-                                  .slice(0, 2)
-                                  .map((g) => g.name)
-                                  .join(" , ")
-                              : "NO jenres"}
-                          </div>
-
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            ⭐{manga?.score?.toFixed(1) ?? "N/A"} • Rank #
-                            {manga?.rank ?? "?"}
-                          </p>
-                        </div>
-                      </div>
+                    <Link
+                      to={`/manga/${manga.mal_id}`}
+                      key={manga.mal_id}
+                      onClick={() => {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                    >
+                      <ModalMangaCard manga={manga} />
                     </Link>
                   ))}
                 </div>
-              </section>
-            )}
+              )}
+            </section>
 
             {isOpen && (
-              <MangaModal
+              <ModalManga
                 onClose={() => setIsOpen(false)}
                 topMangas={topMangas}
                 loadingTopMangas={loadingTopMangas}
