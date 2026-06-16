@@ -1,26 +1,41 @@
 export default function MangaSlot({ title, value, onClick, selectedMangas }) {
   return (
-    <div
-      onClick={onClick}
-      className="border-border bg-surface dark:border-border-dark dark:bg-surface-dark rounded-2xl border p-5"
-    >
-      <h3 className="text-text dark:text-text-dark mb-4 font-semibold">
+    <div className="border-border bg-surface dark:border-border-dark dark:bg-surface-dark grid grid-rows-[auto_1fr] rounded-xl border">
+      <h3 className="text-text dark:text-text-dark mb-px p-2 font-semibold">
         {title}
       </h3>
       {selectedMangas ? (
-        <div className="flex cursor-pointer flex-col items-center">
-          <img
-            src={selectedMangas.images.jpg.image_url}
-            alt={selectedMangas.title}
-            className="h-36 rounded object-cover"
-          />
+        <div
+          className="relative flex flex-col items-center justify-center overflow-hidden rounded-xl"
+          style={{
+            backgroundImage: `url(${selectedMangas.images.jpg.image_url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* overlay  */}
+          <div className="absolute inset-0 bg-black/80" />
 
-          <p className="dark:text-bg mt-2 text-center text-sm font-medium text-black">
-            {selectedMangas.title}
-          </p>
+          {/* content */}
+          <div
+            onClick={onClick}
+            className="relative z-10 flex flex-col items-center gap-1 p-2"
+          >
+            <img
+              src={selectedMangas.images.jpg.image_url}
+              alt="logo"
+              className="h-38 cursor-pointer rounded-lg object-cover"
+            />
+            <p className="text-center text-sm font-medium text-white">
+              {selectedMangas.title}
+            </p>
+          </div>
         </div>
       ) : (
-        <button className="border-border dark:border-border-dark text-text-muted dark:text-text-muted-dark flex h-48 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed">
+        <button
+          onClick={onClick}
+          className="border-border dark:border-border-dark text-text-muted dark:text-text-muted-dark flex h-54 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed"
+        >
           {value}
         </button>
       )}

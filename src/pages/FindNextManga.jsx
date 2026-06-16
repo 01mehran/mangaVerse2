@@ -124,7 +124,7 @@ export default function FindNextManga() {
 
             {/* Slots */}
             <section className="py-10">
-              <div className="grid gap-5 md:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
                 {selectedMangas.map((manga, index) => (
                   <MangaSlot
                     key={index}
