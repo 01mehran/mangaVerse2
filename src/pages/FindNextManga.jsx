@@ -71,14 +71,21 @@ export default function FindNextManga() {
   };
 
   const handleFindNextManga = async () => {
-    const allGenres = selectedMangas?.flatMap((manga) => manga.genres || []);
-    const genrePairs = allGenres.map((genre) => [genre.mal_id, genre.name]);
-    const uniqueGenres = new Map(genrePairs);
-    const genres = [...uniqueGenres.values()];
+    const allGenres = selectedMangas?.flatMap((manga) => manga?.genres || []);
 
-    const genreIds = genres
+    const genreCount = {};
+
+    allGenres.forEach((genre) => {
+      genreCount[genre.mal_id] = {
+        genre,
+        count: (genreCount[genre.mal_id]?.count || 0) + 1,
+      };
+    });
+
+    const genreIds = Object.values(genreCount)
+      .sort((a, b) => b.count - a.count)
       .slice(0, 3)
-      .map((genre) => genre.mal_id)
+      .map((item) => item.genre.mal_id)
       .join(",");
 
     try {
