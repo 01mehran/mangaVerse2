@@ -71,13 +71,11 @@ export default function FindNextManga() {
   };
 
   const handleFindNextManga = async () => {
-    const genres = [
-      ...new Map(
-        selectedMangas
-          .flatMap((manga) => manga?.genres || [])
-          .map((genre) => [genre.mal_id, genre]),
-      ).values(),
-    ];
+    const allGenres = selectedMangas?.flatMap((manga) => manga.genres || []);
+    const genrePairs = allGenres.map((genre) => [genre.mal_id, genre.name]);
+    const uniqueGenres = new Map(genrePairs);
+    const genres = [...uniqueGenres.values()];
+
     const genreIds = genres
       .slice(0, 3)
       .map((genre) => genre.mal_id)
@@ -86,7 +84,7 @@ export default function FindNextManga() {
     try {
       setLoadingRecommended(true);
 
-      const { data } = await axios.get(
+      const { data: response } = await axios.get(
         `https://api.jikan.moe/v4/manga?genres=${genreIds}`,
       );
 
@@ -94,7 +92,7 @@ export default function FindNextManga() {
         .filter(Boolean)
         .map((manga) => manga.mal_id);
 
-      const recommendations = data.data.filter(
+      const recommendations = response.data.filter(
         (manga) => !selectedIds.includes(manga.mal_id),
       );
 
