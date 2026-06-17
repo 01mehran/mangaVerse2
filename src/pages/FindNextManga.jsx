@@ -162,7 +162,7 @@ export default function FindNextManga() {
                 className="bg-primary hover:bg-primary/90 dark:bg-primary-dark/70 dark:hover:bg-primary-dark/80 text-md h-10 w-54 cursor-pointer rounded-xl px-5 text-[14px] font-semibold text-white transition disabled:pointer-events-none disabled:opacity-60 sm:px-6 md:w-72"
               >
                 {loadingRecommended ? (
-                  <span className="dark:border-secondary-dark border-primary pointer-events-none mx-auto inline-block size-4 animate-spin rounded-xl border-2 border-r-0 border-l-0"></span>
+                  <span className="dark:border-secondary-dark pointer-events-none mx-auto inline-block size-4 animate-spin rounded-xl border-2 border-r-0 border-l-0 border-white"></span>
                 ) : (
                   "Show Similar Mangas "
                 )}
@@ -171,7 +171,7 @@ export default function FindNextManga() {
 
             <section>
               {recommendedMangas.length > 0 && (
-                <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 overflow-scroll md:grid-cols-3 lg:grid-cols-4">
+                <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                   {recommendedMangas.map((manga) => (
                     <Link
                       to={`/manga/${manga.mal_id}`}

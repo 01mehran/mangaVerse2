@@ -2,7 +2,7 @@ export default function ModalMangaCard({ manga, onSelect }) {
   return (
     <div
       onClick={() => onSelect?.(manga)}
-      className="flex cursor-pointer items-center gap-3 rounded-lg bg-gray-100 p-2 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+      className="shadow-card dark:bg-surface-dark flex cursor-pointer items-center gap-3 rounded-lg bg-white/85 p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
     >
       {/* Image */}
       <img

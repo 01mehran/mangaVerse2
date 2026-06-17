@@ -8,7 +8,7 @@ export default function MangaSlot({
   onDelete,
 }) {
   return (
-    <div className="border-border bg-surface dark:border-border-dark dark:bg-surface-dark grid grid-rows-[auto_1fr] rounded-xl border">
+    <div className="border-border bg-surface/90 dark:border-border-dark dark:bg-surface-dark grid grid-rows-[auto_1fr] rounded-xl border">
       <h3 className="text-text dark:text-text-dark mb-px p-2 font-semibold">
         {title}
       </h3>
@@ -22,7 +22,7 @@ export default function MangaSlot({
           }}
         >
           {/* overlay  */}
-          <div className="absolute inset-0 bg-black/85" />
+          <div className="absolute inset-0 bg-black/70" />
 
           {/* content */}
           <div
