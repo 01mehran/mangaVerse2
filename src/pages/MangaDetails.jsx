@@ -60,12 +60,12 @@ export default function MangaDetails() {
                   </div>
 
                   {/* SCORE + STATS */}
-                  <div className="flex flex-wrap items-center gap-3">
-                    <div className="bg-warning-light text-warning-dark dark:bg-warning-dark-bg dark:text-warning-dark rounded-xl px-4 py-2 font-semibold">
-                      ⭐ {mangaDetails?.score?.toFixed(2) ?? "N/A"}
+                  <div className="xs:grid-cols-2 grid grid-cols-1 gap-1.5 sm:text-center lg:grid-cols-4">
+                    <div className="bg-warning-light text-warning-dark dark:bg-warning-dark-bg dark:text-warning-dark rounded-xl px-4 py-2 text-sm font-semibold">
+                      Score {mangaDetails?.score?.toFixed(2) ?? "N/A"} ⭐
                     </div>
 
-                    <div className="bg-secondary-light text-secondary dark:bg-secondary-bg-dark dark:text-secondary-dark rounded-xl px-4 py-2 font-semibold">
+                    <div className="bg-secondary-light text-secondary dark:bg-secondary-bg-dark dark:text-secondary-dark rounded-xl px-4 py-2 text-sm font-semibold">
                       Rank #{mangaDetails?.rank ?? "N/A"}
                     </div>
 
@@ -96,7 +96,7 @@ export default function MangaDetails() {
                     )}
                   </div>
 
-                  <div className="rounded-2xl border border-slate-200 bg-white/70 p-6 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
+                  <div className="xs:p-6 rounded-2xl border border-slate-200 bg-white/70 p-3 shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/3">
                     {/* Manga Info List; */}
                     <InfoList mangaDetails={mangaDetails} />
                   </div>
