@@ -111,6 +111,12 @@ export default function FindNextManga() {
     }
   };
 
+  const handleDeleteManga = (id) => {
+    setSelectedMangas((prev) =>
+      prev.map((manga) => (manga?.mal_id === id ? null : manga)),
+    );
+  };
+
   return (
     <section className="bg-bg dark:bg-bg-dark min-h-screen py-6 md:py-8">
       <Container>
@@ -132,6 +138,7 @@ export default function FindNextManga() {
                     value="Select Manga +"
                     onClick={() => handleClick(index)}
                     selectedMangas={manga}
+                    onDelete={handleDeleteManga}
                   />
                 ))}
               </div>

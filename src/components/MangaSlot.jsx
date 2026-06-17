@@ -1,4 +1,12 @@
-export default function MangaSlot({ title, value, onClick, selectedMangas }) {
+import { X } from "lucide-react";
+
+export default function MangaSlot({
+  title,
+  value,
+  onClick,
+  selectedMangas,
+  onDelete,
+}) {
   return (
     <div className="border-border bg-surface dark:border-border-dark dark:bg-surface-dark grid grid-rows-[auto_1fr] rounded-xl border">
       <h3 className="text-text dark:text-text-dark mb-px p-2 font-semibold">
@@ -14,7 +22,7 @@ export default function MangaSlot({ title, value, onClick, selectedMangas }) {
           }}
         >
           {/* overlay  */}
-          <div className="absolute inset-0 bg-black/80" />
+          <div className="absolute inset-0 bg-black/85" />
 
           {/* content */}
           <div
@@ -30,6 +38,13 @@ export default function MangaSlot({ title, value, onClick, selectedMangas }) {
               {selectedMangas.title}
             </p>
           </div>
+
+          <button
+            onClick={() => onDelete(selectedMangas.mal_id)}
+            className="absolute top-2 right-2 z-30 cursor-pointer text-white"
+          >
+            <X size={24} />
+          </button>
         </div>
       ) : (
         <button
