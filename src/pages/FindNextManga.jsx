@@ -112,9 +112,19 @@ export default function FindNextManga() {
   };
 
   const handleDeleteManga = (id) => {
-    setSelectedMangas((prev) =>
-      prev.map((manga) => (manga?.mal_id === id ? null : manga)),
-    );
+    setSelectedMangas((prev) => {
+      const updated = prev.map((manga) =>
+        manga?.mal_id === id ? null : manga,
+      );
+
+      const hasManga = updated.some((manga) => manga !== null);
+
+      if (!hasManga) {
+        setRecommendedMangas([]);
+      }
+
+      return updated;
+    });
   };
 
   return (
