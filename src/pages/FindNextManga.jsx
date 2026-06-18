@@ -9,9 +9,7 @@ import axios from "axios";
 
 // Custom Hooks;
 import { useSearchManga } from "../hooks/useSearchManga";
-
-// Utils;
-import getFromStorage from "../utils/getFromStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 // Components;
 import Container from "../components/Container";
@@ -27,23 +25,15 @@ export default function FindNextManga() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSlot, setActiveSlot] = useState(null);
   const [loadingRecommended, setLoadingRecommended] = useState(false);
-
-  const [selectedMangas, setSelectedMangas] = useState(() =>
-    getFromStorage("selectedMangas", [null, null, null]),
+  const [selectedMangas, setSelectedMangas] = useLocalStorage(
+    "selectedMangas",
+    [null, null, null],
   );
-
-  const [recommendedMangas, setRecommendedMangas] = useState(() =>
-    getFromStorage("savedManga", []),
+  const [recommendedMangas, setRecommendedMangas] = useLocalStorage(
+    "savedManga",
+    [],
   );
   const [recommendedError, setRecommendedError] = useState(null);
-
-  useEffect(() => {
-    localStorage.setItem("selectedMangas", JSON.stringify(selectedMangas));
-  }, [selectedMangas]);
-
-  useEffect(() => {
-    localStorage.setItem("savedManga", JSON.stringify(recommendedMangas));
-  }, [recommendedMangas]);
 
   const { setQuery, setSearchedManga } = useSearchManga();
 
