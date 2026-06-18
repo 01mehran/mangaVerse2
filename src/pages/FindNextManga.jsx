@@ -35,6 +35,7 @@ export default function FindNextManga() {
   const [recommendedMangas, setRecommendedMangas] = useState(() =>
     getFromStorage("savedManga", []),
   );
+  const [recommendedError, setRecommendedError] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("selectedMangas", JSON.stringify(selectedMangas));
@@ -71,6 +72,8 @@ export default function FindNextManga() {
   };
 
   const handleFindNextManga = async () => {
+    setRecommendedError(null);
+
     const allGenres = selectedMangas?.flatMap((manga) => manga?.genres || []);
 
     const genreCount = {};
@@ -106,6 +109,7 @@ export default function FindNextManga() {
       setRecommendedMangas(recommendations);
     } catch (err) {
       console.error(err);
+      setRecommendedError(err);
     } finally {
       setLoadingRecommended(false);
     }
@@ -170,6 +174,13 @@ export default function FindNextManga() {
             </section>
 
             <section>
+              {recommendedError && (
+                <div className="mx-auto w-fit text-center text-sm text-red-600">
+                  <p className="">{`Somethig went wrong (${recommendedError.status})`}</p>
+                  <span>Try again later</span>
+                </div>
+              )}
+
               {recommendedMangas.length > 0 && (
                 <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
                   {recommendedMangas.map((manga) => (
