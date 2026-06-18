@@ -43,7 +43,7 @@ export default function ModalManga({
         onClick={onClose}
         className="fixed inset-0 z-40 bg-black/5 backdrop-blur-sm dark:bg-black/5"
       ></div>
-      <div className="z-50 h-112.5 w-105 overflow-hidden rounded-2xl bg-white text-gray-900 shadow-xl dark:bg-gray-900 dark:text-white">
+      <div className="animate-modal-fade-in z-50 h-112.5 w-105 overflow-hidden rounded-2xl bg-white text-gray-900 shadow-xl dark:bg-gray-900 dark:text-white">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-700">
           <h2 className="text-lg font-semibold">Select a Manga</h2>
