@@ -52,18 +52,17 @@ A modern manga discovery application built with React and Tailwindcss, powered b
 
 ![Recommendation Page](./src/assets/screenShots/recommendation.png)
 
----
+Click **[here](https://manga-verse2.vercel.app/)** to explore your favorite mangas.
 
-## 🧠 Compare & Recommend Feature
+## 🧠 Recommend Feature
 
-One of MangaVerse's standout features is the manga comparison system.
+One of MangaVerse's standout features is the manga Recommend Feature.
 
 Users can:
 
 1. Select multiple manga.
-2. Compare their statistics.
-3. Analyze genre overlap.
-4. Generate personalized recommendations based on selected manga.
+2. Analyze genre overlap.
+3. Generate personalized recommendations based on selected manga.
 
 This helps users discover new manga that match their interests.
 
