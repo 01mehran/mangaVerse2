@@ -36,6 +36,20 @@ export default function ModalManga({
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
     <div className="xs:mx-0 fixed inset-0 z-50 mx-2 flex items-center justify-center">
       {/* Layer; */}
