@@ -16,7 +16,7 @@ export default function MangaList({ mangas }) {
         </h1>
 
         {/* Manga Cards*/}
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(225px,1fr))] gap-6 px-2">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(12.5rem,1fr))] gap-4 px-2">
           {mangas.map((manga) => (
             <MangaCard key={manga.mal_id} manga={manga} />
           ))}
