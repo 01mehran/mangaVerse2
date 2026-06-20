@@ -2,6 +2,7 @@
 import Container from "./Container";
 import MangaCard from "./MangaCard";
 import Hero from "./Hero";
+import { Link } from "react-router-dom";
 
 export default function MangaList({ mangas }) {
   return (
@@ -11,9 +12,16 @@ export default function MangaList({ mangas }) {
 
       {/* Top Manga List */}
       <section>
-        <h1 className="text-md dark:bg-bg-dark dark:text-text-dark mb-2 py-2 font-medium">
-          Top-Rated Manga
-        </h1>
+        <div className="mb-2 flex items-center justify-between py-2">
+          <h1 className="md:text-md dark:text-text-dark text-sm font-medium">
+            Top-Rated Manga
+          </h1>
+          <Link to="/favorites">
+            <p className="dark:text-text-dark md:text-md text-sm font-medium">
+              Favorites ♥
+            </p>
+          </Link>
+        </div>
 
         {/* Manga Cards*/}
         <div className="grid grid-cols-[repeat(auto-fill,minmax(12.5rem,1fr))] gap-4 px-2">
