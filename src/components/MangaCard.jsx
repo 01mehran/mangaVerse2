@@ -1,5 +1,6 @@
 // Static Cover;
 import { Link } from "react-router-dom";
+import FavoriteButton from "./FavoriteButton";
 
 export default function MangaCard({ manga }) {
   return (
@@ -26,6 +27,9 @@ export default function MangaCard({ manga }) {
           <div className="bg-overlay-dark text-warning-dark absolute top-3 right-3 rounded-lg px-2 py-1 text-sm font-medium backdrop-blur">
             ⭐ {manga?.score?.toFixed(1) ?? "N/A"}
           </div>
+
+          {/* Heart Svg Icon Button */}
+          <FavoriteButton />
         </div>
 
         {/* Content */}
@@ -36,12 +40,12 @@ export default function MangaCard({ manga }) {
           </h3>
 
           {/* Genres */}
-          <div className="flex  gap-2 text-indigo-500 dark:text-purple-400">
+          <div className="flex gap-2 text-indigo-500 dark:text-purple-400">
             {manga?.genres?.length ? (
               manga.genres?.slice(0, 2).map((genre) => (
                 <span
                   key={genre.mal_id}
-                  className="bg-primary-bg text-primary dark:bg-primary-dark-bg dark:text-primary-dark-light text-nowrap rounded-full px-1.5 py-1 text-xs font-medium"
+                  className="bg-primary-bg text-primary dark:bg-primary-dark-bg dark:text-primary-dark-light rounded-full px-1.5 py-1 text-xs font-medium text-nowrap"
                 >
                   {genre.name}
                 </span>
