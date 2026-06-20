@@ -1,9 +1,13 @@
+// Components;
+import BackButton from "../components/BackButton";
+import Container from "../components/Container";
+
 export default function Favorites() {
   return (
-    <section>
-      <main className="bg-bg dark:bg-bg-dark min-h-screen">
-        <p className="text-bg-dark dark:text-bg">favorites page</p>
-      </main>
+    <section className="bg-bg dark:bg-bg-dark min-h-screen py-6 md:py-8">
+      <Container>
+        <BackButton />
+      </Container>
     </section>
   );
 }
