@@ -1,5 +1,7 @@
-// Static Cover;
+// React-router-dom;
 import { Link } from "react-router-dom";
+
+// Components;
 import FavoriteButton from "./FavoriteButton";
 
 export default function MangaCard({ manga }) {
@@ -29,7 +31,7 @@ export default function MangaCard({ manga }) {
           </div>
 
           {/* Heart Svg Icon Button */}
-          <FavoriteButton />
+          <FavoriteButton manga={manga} />
         </div>
 
         {/* Content */}

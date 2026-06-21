@@ -1,19 +1,22 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
-// Css
+// Css;
 import "./index.css";
 
 // Components;
 import App from "./App.jsx";
 
-// Theme Context Provider;
+// Contexts Provider;
 import { ThemeContextProvider } from "./contexts/ThemeContext.jsx";
+import { FavoritesContextProvider } from "./contexts/FavoritesContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeContextProvider>
-      <App />
+      <FavoritesContextProvider>
+        <App />
+      </FavoritesContextProvider>
     </ThemeContextProvider>
   </StrictMode>,
 );
