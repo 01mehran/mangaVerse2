@@ -5,8 +5,24 @@ const FavoritesContext = createContext();
 export const FavoritesContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
+  const handleFavourites = (manga) => {
+    const isFavourite = favorites.some(
+      (favorite) => favorite.mal_id === manga.mal_id,
+    );
+
+    if (isFavourite) {
+      setFavorites((prev) =>
+        prev.filter((favourite) => favourite.mal_id !== manga.mal_id),
+      );
+    } else {
+      setFavorites((prev) => [...prev, manga]);
+    }
+  };
+
   return (
-    <FavoritesContext.Provider value={{ favorites, setFavorites }}>
+    <FavoritesContext.Provider
+      value={{ favorites, setFavorites, handleFavourites }}
+    >
       {children}
     </FavoritesContext.Provider>
   );

@@ -2,18 +2,16 @@
 import { useFavorites } from "../contexts/FavoritesContext";
 
 export default function FavoriteButton({ manga }) {
-  const { setFavorites } = useFavorites();
-
-  const handleFavorites = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    setFavorites((prev) => [...prev, manga]);
-  };
+  const { handleFavourites } = useFavorites();
 
   return (
     <button
-      onClick={handleFavorites}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        handleFavourites(manga);
+      }}
       className="bg-surface-light-dark/90 absolute top-3 left-3 w-fit cursor-pointer rounded-lg p-1 transition-all hover:scale-105"
     >
       <svg
