@@ -9,12 +9,12 @@ const FavoritesContext = createContext();
 export const FavoritesContextProvider = ({ children }) => {
   const [favorites, setFavorites] = useLocalStorage("favourites", []);
 
-  const handleFavourites = (manga) => {
-    const isFavourite = favorites.some(
-      (favorite) => favorite.mal_id === manga.mal_id,
-    );
+  const isFavourite = (manga) => {
+    return favorites.some((favourite) => favourite.mal_id === manga.mal_id);
+  };
 
-    if (isFavourite) {
+  const toggleFavourite = (manga) => {
+    if (isFavourite(manga)) {
       setFavorites((prev) =>
         prev.filter((favourite) => favourite.mal_id !== manga.mal_id),
       );
@@ -25,7 +25,7 @@ export const FavoritesContextProvider = ({ children }) => {
 
   return (
     <FavoritesContext.Provider
-      value={{ favorites, setFavorites, handleFavourites }}
+      value={{ favorites, setFavorites, toggleFavourite, isFavourite }}
     >
       {children}
     </FavoritesContext.Provider>
