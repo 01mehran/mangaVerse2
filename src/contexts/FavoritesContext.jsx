@@ -1,9 +1,13 @@
+// React;
 import { createContext, useContext, useState } from "react";
+
+// Custom Hooks;
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const FavoritesContext = createContext();
 
 export const FavoritesContextProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useLocalStorage("favourites", []);
 
   const handleFavourites = (manga) => {
     const isFavourite = favorites.some(
