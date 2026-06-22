@@ -61,7 +61,7 @@ export default function SearchResults() {
                 Found {searchedManga.length} manga
               </p>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(12.5rem,1fr))] gap-4">
                 {searchedManga.map((manga) => (
                   <MangaCard manga={manga} key={manga.mal_id} />
                 ))}
