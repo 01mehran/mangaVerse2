@@ -44,6 +44,10 @@ export default function FindNextManga() {
 
   const isDisabled = selectedMangas.filter(Boolean).length === 0;
 
+  const selectedMangaNames = selectedMangas
+    ?.map((manga) => manga?.title.slice(0, 10))
+    .join(" • ");
+
   const handleClick = (slotIndex) => {
     setActiveSlot(slotIndex);
     setIsOpen(true);
@@ -172,19 +176,28 @@ export default function FindNextManga() {
               )}
 
               {recommendedMangas.length > 0 && (
-                <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                  {recommendedMangas.map((manga) => (
-                    <Link
-                      to={`/manga/${manga.mal_id}`}
-                      key={manga.mal_id}
-                      onClick={() => {
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                    >
-                      <ModalMangaCard manga={manga} />
-                    </Link>
-                  ))}
-                </div>
+                <>
+                  <h4 className="dark:text-bg border-primary/20 my-4 border-b pb-1 text-sm font-medium">
+                    Similar to:{" "}
+                    <span className="dark:text-secondary/90 text-primary/90 italic">
+                      {selectedMangaNames}
+                    </span>
+                  </h4>
+
+                  <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                    {recommendedMangas.map((manga) => (
+                      <Link
+                        to={`/manga/${manga.mal_id}`}
+                        key={manga.mal_id}
+                        onClick={() => {
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                      >
+                        <ModalMangaCard manga={manga} />
+                      </Link>
+                    ))}
+                  </div>
+                </>
               )}
             </section>
 
