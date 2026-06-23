@@ -25,11 +25,22 @@ export default function Favorites() {
 
         <main>
           {!isLoading && favorites.length > 0 && (
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(12.5rem,1fr))] gap-4 px-2">
-              {favorites.map((manga) => (
-                <MangaCard key={manga.mal_id} manga={manga} />
-              ))}
-            </div>
+            <section className="">
+              <div className="mb-2 flex items-center justify-between py-2">
+                <h1 className="md:text-md dark:text-text-dark text-sm font-medium">
+                  My Library
+                </h1>
+                <h1 className="md:text-md dark:text-text-dark text-sm font-medium">
+                  {favorites.length} favourite manga ♥
+                </h1>
+              </div>
+
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(12.5rem,1fr))] gap-4 px-2">
+                {favorites.map((manga) => (
+                  <MangaCard key={manga.mal_id} manga={manga} />
+                ))}
+              </div>
+            </section>
           )}
 
           {!isLoading && favorites.length === 0 && (
