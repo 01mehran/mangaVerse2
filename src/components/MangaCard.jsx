@@ -15,7 +15,7 @@ export default function MangaCard({ manga }) {
         })
       }
     >
-      <article className="group border-border bg-surface dark:border-border-dark dark:bg-surface-dark cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <article className="group border-border bg-surface dark:border-border-dark dark:bg-surface-dark dark:shadow-surface-light/10 cursor-pointer overflow-hidden rounded-2xl border shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg">
         {/* Cover */}
         <div className="relative aspect-3/4 overflow-hidden">
           <img
