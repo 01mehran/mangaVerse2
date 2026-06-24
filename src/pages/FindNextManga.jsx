@@ -34,6 +34,7 @@ export default function FindNextManga() {
     [],
   );
   const [recommendedError, setRecommendedError] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const { setQuery, setSearchedManga } = useSearchManga();
 
@@ -47,6 +48,10 @@ export default function FindNextManga() {
   const selectedMangaNames = selectedMangas
     ?.map((manga) => manga?.title.slice(0, 10))
     .join(" • ");
+
+  const displayedMangas = showAll
+    ? recommendedMangas
+    : recommendedMangas.slice(0, 12);
 
   const handleClick = (slotIndex) => {
     setActiveSlot(slotIndex);
@@ -185,7 +190,7 @@ export default function FindNextManga() {
                   </h4>
 
                   <div className="xs:grid-cols-2 grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-                    {recommendedMangas.map((manga) => (
+                    {displayedMangas.map((manga) => (
                       <Link
                         to={`/manga/${manga.mal_id}`}
                         key={manga.mal_id}
@@ -197,6 +202,12 @@ export default function FindNextManga() {
                       </Link>
                     ))}
                   </div>
+                  <button
+                    onClick={() => setShowAll((prev) => !prev)}
+                    className="text-primary dark:text-secondary cursor-pointer pt-3 text-sm font-medium italic"
+                  >
+                    {showAll ? "Show less manga" : "Show more manga"}
+                  </button>
                 </>
               )}
             </section>
