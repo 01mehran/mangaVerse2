@@ -80,8 +80,10 @@ export default function Header() {
               onClick={handleToggleTheme}
               className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-slate-200 bg-slate-100 hover:scale-105 hover:bg-indigo-100 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10"
             >
-              <Moon size={18} className="block dark:hidden" />
-              <Sun size={18} className="hidden dark:block" />
+              <span className="relative flex h-5 w-5 items-center justify-center">
+                <Sun className="transition-rotate absolute h-5 w-5 scale-0 rotate-90 opacity-0 duration-300 ease-out dark:scale-100 dark:rotate-0 dark:opacity-100" />
+                <Moon className="transition-rotate absolute h-5 w-5 scale-100 rotate-0 opacity-100 duration-300 ease-out dark:scale-0 dark:-rotate-90 dark:opacity-0" />
+              </span>
             </button>
           </article>
         </div>
